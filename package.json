@@ -12,6 +12,9 @@
     "babel-preset-env": "^1.7.0",
     "babel-register": "^6.26.0"
   },
+  "engines": {
+    "node": "12.x"
+  },
   "dependencies": {
     "babel-polyfill": "^6.26.0",
     "body-parser": "^1.19.0",
