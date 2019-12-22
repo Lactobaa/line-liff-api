@@ -8,7 +8,7 @@ import path from 'path';
 import { router as product } from './src/routers/product.js';
 import { router as order } from './src/routers/order.js';
 const app = express();
-const PORT = 9002;
+const PORT = process.env.PORT || 9002;
 const __dirname = path.resolve();
 
 http.createServer(app).listen(PORT, () => {
