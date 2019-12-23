@@ -1,7 +1,6 @@
 import express from 'express';
-// import { ObjectId } from 'mongodb';
 import { mongodb } from '../mongodb.js';
-// import { di } from '../di';
+import { sendText } from './linebot.js';
 import { resp } from '../utils/resp.js';
 
 export const router = express.Router();
@@ -34,11 +33,13 @@ export async function getAllOrders(req, res, next) {
 export async function updateOrder(req, res, next) {
   try {
     const { body } = req;
+    console.log('body', body);
     const connection = await mongodb.connect();
     const db = connection.db('line');
     const id = mongodb.ObjectId(req.params.id);
     await db.collection('orders').updateOne({ _id: id }, { $set: body });
     const data = await db.collection('orders').findOne({ _id: id });
+    sendText(body.userId, 'Your order has been served!');
     connection.close();
     next(resp({ data }));
   } catch (err) {
